@@ -7,27 +7,6 @@ from feature_extraction import train_word2vec, sentence_to_vec
 from sklearn.ensemble import RandomForestClassifier  
 from sklearn.model_selection import cross_val_score
 
-
-def train_and_save_model(sentences, labels, model_output_path, train_size=0.8):
-    """
-    Train a Random Forest classifier and save the trained model.
-    
-    Parameters:
-    - sentences (list): List of sentences to train on.
-    - labels (list): List of labels corresponding to the sentences.
-    - model_output_path (str): File path to save the trained model.
-    - train_size (float, optional): Proportion of data to use for training. Default is 0.8.
-    """
-    # Train the Word2Vec model
-    tokenized_sentences = [sentence.split() for sentence in sentences]
-    word2vec_model = train_word2vec(tokenized_sentences)
-    
-    # Convert sentences to vectors
-    sentence_vectors = np.array([sentence_to_vec(sentence, word2vec_model) for sentence in sentences])
-    
-    # Split the dataset into training and testing sets
-
-
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__) 
 
@@ -94,8 +73,6 @@ def train_and_save_model(sentences, labels, model_output_path, train_size=0.8):
     logger.info("Trained model saved to: %s", model_output_path)
     
     return classifier
-
-
 
 def main():
     logger.info("Start training the model")
