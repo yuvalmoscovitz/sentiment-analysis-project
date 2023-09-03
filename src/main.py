@@ -41,7 +41,8 @@ def main():
     
     # Train and save the model
     model_output_path = "models/sentiment_classifier.pkl"
-    train_and_save_model(sentences, labels, model_output_path)
+    word2vec_output_path = "/Users/yuvalmoscovitz/Code/SentimentAnalysisProject/models/word2vec_model"
+    train_and_save_model(sentences, labels, model_output_path, word2vec_output_path)
     logger.info("Training completed.")
 
 if __name__ == "__main__":

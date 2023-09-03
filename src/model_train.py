@@ -2,15 +2,16 @@ import pickle
 import logging
 import numpy as np
 import pandas as pd
+from gensim.models import Word2Vec
 from data_loader import load_cleaned_data_csv  
 from feature_extraction import train_word2vec, sentence_to_vec  
 from sklearn.ensemble import RandomForestClassifier  
-from sklearn.model_selection import cross_val_score
+
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__) 
 
-def train_and_save_model(sentences, labels, model_output_path, train_size=0.8):
+def train_and_save_model(sentences, labels, model_output_path, word2vec_output_path, train_size=0.8):
     """
     Train a Random Forest classifier, extract feature importances, 
     retrain the model with top N features, and save the trained model.
@@ -24,6 +25,7 @@ def train_and_save_model(sentences, labels, model_output_path, train_size=0.8):
     # Train the Word2Vec model
     tokenized_sentences = [sentence.split() for sentence in sentences]
     word2vec_model = train_word2vec(tokenized_sentences)
+    word2vec_model.save(word2vec_output_path)
     
     # Convert sentences to vectors
     sentence_vectors = np.array([sentence_to_vec(sentence, word2vec_model) for sentence in sentences])
@@ -50,6 +52,9 @@ def train_and_save_model(sentences, labels, model_output_path, train_size=0.8):
     # Select top N important features
     top_n = 7
     top_n_indices = feature_importance_df.index[:top_n].tolist()
+
+    with open("models/top_n_indices.pkl", 'wb') as f:
+        pickle.dump(top_n_indices, f)
 
     # Filter your training and testing sets to include only the top N features
     train_set_filtered = train_set[:, top_n_indices]
@@ -88,7 +93,8 @@ def main():
     
     # Train and save the model
     model_output_path = "models/sentiment_classifier.pkl"
-    train_and_save_model(sentences, labels, model_output_path)
+    word2vec_output_path = "models/word2vec_model"
+    train_and_save_model(sentences, labels, model_output_path, word2vec_output_path)
     logger.info("Training completed.")
 
 if __name__ == "__main__":

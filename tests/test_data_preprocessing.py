@@ -1,9 +1,10 @@
 import sys
+import os
 import unittest
 
-sys.path.append('/Users/yuvalmoscovitz/Code/SentimentAnalysisProject')
+project_root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+sys.path.append(project_root)
 
-#local modules
 from src.data_preprocessing import split_sentence_and_label, clean_sentence, convert_label_to_numeric
 
 class TestDataPreprocessing(unittest.TestCase):

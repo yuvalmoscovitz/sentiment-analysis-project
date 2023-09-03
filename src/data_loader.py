@@ -78,3 +78,16 @@ def load_model(model_path):
     except FileNotFoundError:
         logger.error("Model file not found.")
         return None
+    
+def load_word2vec_model(word2vec_model_path):
+    try:
+        from gensim.models import Word2Vec
+        model = Word2Vec.load(word2vec_model_path)
+        return model
+    except FileNotFoundError:
+        logger.error("Word2Vec model file not found.")
+        return None
+    
+def load_top_n_indices(file_path):
+    with open(file_path, 'rb') as f:
+        return pickle.load(f)
