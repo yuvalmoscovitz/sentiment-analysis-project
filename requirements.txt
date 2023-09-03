@@ -68,11 +68,6 @@ seaborn==0.12.2
 six==1.16.0
 smart-open==6.3.0
 soupsieve==2.4.1
-tensorboard==2.13.0
-tensorboard-data-server==0.7.1
-tensorflow==2.13.0
-tensorflow-estimator==2.13.0
-tensorflow-macos==2.13.0
 termcolor==2.3.0
 threadpoolctl==3.2.0
 tqdm==4.66.1
@@ -83,4 +78,4 @@ webencodings==0.5.1
 Werkzeug==2.3.7
 wrapt==1.15.0
 yarl==1.9.2
-yfinance==0.2.27
+

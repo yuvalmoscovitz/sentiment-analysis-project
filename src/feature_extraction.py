@@ -11,8 +11,7 @@ def train_word2vec(sentences, vector_size=100, window=5, min_count=1):
 
 
 def sentence_to_vec(sentence, model):
-    """
-    Convert a sentence to a vector by averaging the vectors of the words in the sentence."""
+    """Convert a sentence to a vector by averaging the vectors of the words in the sentence."""
     words = sentence.split()
     word_vecs = [model.wv[word] for word in words if word in model.wv.index_to_key]
     if len(word_vecs) == 0:

@@ -1,0 +1,35 @@
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Stock Market Sentiment Analysis</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Stock Market Sentiment Analysis</h1>
+        </header>
+        <main>
+            <form id="stock-form">
+                <div class="input-group">
+                    <label for="stock-ticker">Enter Stock Ticker:</label>
+                    <input type="text" id="stock-ticker" name="stock-ticker" value="AAPL" required>
+                </div>
+                <button type="submit" class="analyze-button">Analyze</button>
+            </form>
+            <div id="result" class="result">
+                <!-- Results will be displayed here -->
+                <div id="basic-chart-container" class="chart-container">
+                    <canvas id="basic-chart"></canvas>
+                </div>
+                <div id="advanced-chart-container" class="chart-container">
+                    <canvas id="advanced-chart"></canvas>
+                </div>
+            </div>
+        </main>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>

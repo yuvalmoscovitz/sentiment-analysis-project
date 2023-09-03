@@ -1,4 +1,4 @@
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, send_from_directory
 import requests
 import os
 import logging
@@ -46,6 +46,16 @@ def analyze_sentiment_route():
     except Exception as e:
         logger.error(f"An error occurred: {str(e)}")
         return jsonify({"error": str(e)}), 400
+    
+
+@app.route('/')
+def index():
+    return send_from_directory('static', 'index.html')
+
+@app.route('/<path:path>')
+def serve_static(path):
+    return send_from_directory('static', path)
+
 
 if __name__ == '__main__':
     logger.info("Starting the Flask server")
