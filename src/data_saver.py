@@ -7,13 +7,7 @@ logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
 def save_data_to_csv(data, file_path, header=None):
-    """Save data to a CSV file.
-
-    Parameters:
-    - data (List[Tuple]): The data to be saved.
-    - file_path (str): The path where the CSV file will be saved.
-    - header (List[str], optional): The header row for the CSV file.
-    """
+    """Save data to a CSV file."""
     with open(file_path, 'w', newline='', encoding='utf-8') as csvfile:
         writer = csv.writer(csvfile)
         if header:

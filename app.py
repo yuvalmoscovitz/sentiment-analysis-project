@@ -2,7 +2,6 @@ from flask import Flask, request, jsonify
 import requests
 import os
 import logging
-import numpy as np
 from dotenv import load_dotenv
 from src.data_loader import load_model
 from src.model_predict import predict_sentiment_alpha_vantage
@@ -30,6 +29,7 @@ def fetch_news_from_alpha_vantage(ticker, api_key):
 def analyze_sentiment_route():
     try:
         stock_ticker = request.json['stock_ticker']
+        logger.info(f"Received request for stock_ticker: {stock_ticker}")
 
         news_data = fetch_news_from_alpha_vantage(stock_ticker, ALPHA_VANTAGE_API_KEY)
         
@@ -44,7 +44,9 @@ def analyze_sentiment_route():
             "statistics": statistics
         })
     except Exception as e:
+        logger.error(f"An error occurred: {str(e)}")
         return jsonify({"error": str(e)}), 400
 
 if __name__ == '__main__':
+    logger.info("Starting the Flask server")
     app.run(debug=True)

@@ -15,12 +15,6 @@ def train_and_save_model(sentences, labels, model_output_path, word2vec_output_p
     """
     Train a Random Forest classifier, extract feature importances, 
     retrain the model with top N features, and save the trained model.
-    
-    Parameters:
-    - sentences (list): List of sentences to train on.
-    - labels (list): List of labels corresponding to the sentences.
-    - model_output_path (str): File path to save the trained model.
-    - train_size (float, optional): Proportion of data to use for training. Default is 0.8.
     """
     # Train the Word2Vec model
     tokenized_sentences = [sentence.split() for sentence in sentences]

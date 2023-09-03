@@ -25,14 +25,14 @@ def load_cleaned_data_csv(file_path: str, has_header: bool = True) -> Tuple[List
         with open(file_path, 'r', newline='', encoding='utf-8') as csvfile:
             reader = csv.reader(csvfile)
             if has_header:
-                next(reader)  # Skip the header row
+                next(reader)  
             for row in reader:
                 sentence, label = row
                 sentences.append(sentence)
                 try:
-                    labels.append(int(label))  # Assuming labels are stored as integers
+                    labels.append(int(label)) 
                 except ValueError:
-                    labels.append(label)  # Keep as is if conversion fails
+                    labels.append(label)  
         return sentences, labels
     except FileNotFoundError:
         logger.error(f"File not found at {file_path}")

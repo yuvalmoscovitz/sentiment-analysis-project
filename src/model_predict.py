@@ -1,15 +1,14 @@
-import sys
-
 import logging
 
-
-
+logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger(__name__)
 
 from src.data_preprocessing import clean_sentence
 from src.feature_extraction import sentence_to_vec
 from src.data_loader import load_model, load_word2vec_model, load_top_n_indices
 
 def predict_sentiment(input_news: str, model, word2vec_model, top_n_indices) -> int:
+    """Predict the sentiment of a given news title."""
     cleaned_news = clean_sentence(input_news)
     feature_vector = sentence_to_vec(cleaned_news, word2vec_model)
     feature_vector_filtered = feature_vector[top_n_indices]
@@ -25,8 +24,13 @@ def predict_sentiment_alpha_vantage(alpha_vantage_news: dict) -> list:
     top_n_indices_path = "models/top_n_indices.pkl"  
     
     model = load_model(model_path)
+    logger.info("Sentiment classifier model loaded successfully.")
+    
     word2vec_model = load_word2vec_model(word2vec_model_path)
+    logger.info("Word2Vec model loaded successfully.")
+    
     top_n_indices = load_top_n_indices(top_n_indices_path)
+    logger.info("Top N indices loaded successfully.")
     
     alpha_vantage_titles = extract_title_from_alpha_vantage_news(alpha_vantage_news)
     sentiments = []
@@ -37,7 +41,6 @@ def predict_sentiment_alpha_vantage(alpha_vantage_news: dict) -> list:
         sentiments.append(title_sentiment)
         
     return sentiments
-
 
 def extract_title_from_alpha_vantage_news(news_data: dict) -> list:
     """Extract news titles from Alpha Vantage news data."""
