@@ -10,7 +10,6 @@ from src.feature_extraction import sentence_to_vec
 from src.data_loader import load_model, load_word2vec_model, load_top_n_indices
 
 def predict_sentiment(input_news: str, model, word2vec_model, top_n_indices) -> int:
-    """Predict the sentiment of a given news title."""
     cleaned_news = clean_sentence(input_news)
     feature_vector = sentence_to_vec(cleaned_news, word2vec_model)
     feature_vector_filtered = feature_vector[top_n_indices]
